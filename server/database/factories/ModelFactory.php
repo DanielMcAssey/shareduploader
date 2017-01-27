@@ -17,3 +17,15 @@ $factory->define(App\Models\User::class, function ($faker) {
         'email' => $faker->unique()->email,
     ];
 });
+
+$factory->define(App\Models\File::class, function ($faker) {
+    return [
+        'original_name' => $faker->name,
+        'filename' => $faker->unique()->name,
+        'extension' => $faker->fileExtension,
+        'mime' => $faker->mimeType,
+        'location' => $faker->url,
+        'size' => $faker->numberBetween(10000,200000),
+        'ip' => $faker->ipv4
+    ];
+});

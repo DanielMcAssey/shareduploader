@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class FilesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,19 +11,16 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\User::class)->create([
-            'email' => 'user1@example.com',
-            'password' => app('hash')->make('123456')
+        factory(App\Models\File::class)->create([
+            'user_id' => '1'
         ]);
 
-        factory(App\Models\User::class)->create([
-            'email' => 'user2@example.com',
-            'password' => app('hash')->make('123456')
+        factory(App\Models\File::class)->create([
+            'user_id' => '2'
         ]);
 
-        factory(App\Models\User::class)->create([
-            'email' => 'user3@example.com',
-            'password' => app('hash')->make('123456')
+        factory(App\Models\File::class)->create([
+            'user_id' => '3'
         ]);
     }
 }

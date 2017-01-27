@@ -17,6 +17,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->integer('quota_used')->default(0);
+            $table->integer('quota_max')->default(100000000);
+            $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });
     }

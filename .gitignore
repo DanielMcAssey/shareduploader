@@ -1,3 +1,4 @@
 .idea/
 server/_ide_helper.php
 server/.phpstorm.meta.php
+server/.vagrant/

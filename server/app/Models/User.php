@@ -52,4 +52,8 @@ class User extends Model implements
     {
         return [];
     }
+
+    public function files() {
+        return $this->hasMany('App\Models\File');
+    }
 }
