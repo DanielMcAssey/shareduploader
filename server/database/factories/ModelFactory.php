@@ -18,7 +18,7 @@ $factory->define(App\Models\User::class, function ($faker) {
     ];
 });
 
-$factory->define(App\Models\File::class, function ($faker) {
+$factory->define(App\Models\UploadedFile::class, function ($faker) {
     return [
         'original_name' => $faker->name,
         'filename' => $faker->unique()->name,

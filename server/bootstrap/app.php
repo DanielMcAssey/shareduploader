@@ -23,6 +23,8 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
+class_alias('Illuminate\Support\Facades\Storage', 'Storage');
+
 $app->withFacades();
 
 $app->withEloquent();
@@ -47,6 +49,14 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+
+$app->singleton('filesystem', function ($app) {
+    return $app->loadComponent(
+        'filesystems',
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
+        'filesystem'
+    );
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -96,5 +106,14 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../app/Http/routes.php';
 });
+
+/*
+|--------------------------------------------------------------------------
+| Custom Configurators
+|--------------------------------------------------------------------------
+|
+*/
+
+$app->configure('uploader');
 
 return $app;

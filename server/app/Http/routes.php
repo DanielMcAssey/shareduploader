@@ -15,31 +15,25 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->group(['prefix' => 'api/v1', 'namespace' => 'V1'], function () use ($app) {
+$app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers\V1'], function () use ($app) {
 
-    $app->POST('/auth/login', 'AuthController@loginPost');
+    $app->post('auth/login', 'AuthController@login');
+    $app->get('auth/refresh', 'AuthController@refresh');
 
-    $app->group(['middleware' => 'auth'], function () use ($app) {
+    $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers\V1', 'middleware' => 'auth'], function () use ($app) {
 
-        $app->POST('/auth/login', 'AuthController@loginPost');
+        $app->post('file', 'UploadedFilesController@upload');
+        $app->delete('file/{id}', 'UploadedFilesController@delete');
 
     });
 
 });
-/**
- * Routes for resource file
- */
-//$app->get('file', 'UploadedFilesController@all');
-//$app->get('file/{id}', 'UploadedFilesController@get');
-//$app->post('file', 'UploadedFilesController@add');
-//$app->put('file/{id}', 'UploadedFilesController@put');
-//$app->delete('file/{id}', 'UploadedFilesController@remove');
 
 /**
  * Routes for resource user
  */
-$app->get('user', 'UsersController@all');
-$app->get('user/{id}', 'UsersController@get');
-$app->post('user', 'UsersController@add');
-$app->put('user/{id}', 'UsersController@put');
-$app->delete('user/{id}', 'UsersController@remove');
+//$app->get('user', 'UsersController@all');
+//$app->get('user/{id}', 'UsersController@get');
+//$app->post('user', 'UsersController@add');
+//$app->put('user/{id}', 'UsersController@put');
+//$app->delete('user/{id}', 'UsersController@remove');

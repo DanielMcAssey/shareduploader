@@ -27,7 +27,6 @@ class CreateFilesTable extends Migration
             $table->string('filename')->unique();
             $table->string('extension', 10);
             $table->string('mime');
-            $table->text('location');
             $table->integer('size');
             $table->string('ip', 15);
         });
