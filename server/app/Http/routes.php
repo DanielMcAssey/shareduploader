@@ -25,15 +25,12 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'App\Http\Controllers\V1'], fu
         $app->post('file', 'UploadedFilesController@upload');
         $app->delete('file/{id}', 'UploadedFilesController@delete');
 
+        $app->get('user/current', 'UsersController@getCurrentUser');
+        $app->get('user/api-key/generate', 'UsersController@generateApiKey');
+        $app->get('user/api-key', 'UsersController@getApiKey');
+        $app->post('user/password', 'UsersController@changePassword');
+        $app->post('user/email/change', 'UsersController@confirmEmailChange');
+        $app->post('user/email/confirm', 'UsersController@confirmEmailChange');
     });
 
 });
-
-/**
- * Routes for resource user
- */
-//$app->get('user', 'UsersController@all');
-//$app->get('user/{id}', 'UsersController@get');
-//$app->post('user', 'UsersController@add');
-//$app->put('user/{id}', 'UsersController@put');
-//$app->delete('user/{id}', 'UsersController@remove');

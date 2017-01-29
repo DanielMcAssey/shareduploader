@@ -35,7 +35,7 @@ class UploadedFilesController extends Controller {
 
             // No user linked to API key - SHOULD NEVER HAPPEN
             if(!Auth::check())
-                return response()->json(['no_auth'], Response::HTTP_BAD_REQUEST);
+                return response()->json(['no_auth'], Response::HTTP_FORBIDDEN);
 
             $new_quota = bcadd(Auth::user()->quota_used, strval($uploadFile->getSize()));
             // User has gone over quota so cant upload

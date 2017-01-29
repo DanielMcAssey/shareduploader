@@ -31,7 +31,7 @@ class User extends Model implements
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password', 'api_key',
     ];
 
     /**
@@ -55,5 +55,20 @@ class User extends Model implements
 
     public function files() {
         return $this->hasMany('App\Models\File');
+    }
+
+    public function generateApiKey() {
+        $this->api_key = base64_encode(uniqid());
+        return $this->api_key;
+    }
+
+    /**
+     * Gets the pending email changes for a user
+     *
+     * @return EmailChange
+     */
+    public function emailChanges()
+    {
+        return EmailChange::firstOrCreate(['user_id' => $this->getKey()]);
     }
 }

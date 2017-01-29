@@ -4,22 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UploadedFile extends Model
+class EmailChange extends Model
 {
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'files';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'location'
+    ];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -30,5 +24,17 @@ class UploadedFile extends Model
 
     public function user() {
         return $this->belongsTo('App\Models\User');
+    }
+
+    /**
+     * Generate a token for email change
+     *
+     * @return String
+     */
+    public function generateToken()
+    {
+        $this->token = md5(uniqid(mt_rand(), true));
+        $this->save();
+        return $this->token;
     }
 }
